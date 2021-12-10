@@ -20,9 +20,13 @@ public class InteratorAndForEach {
         list.add("D");
         list.add("E");
         Iterator<String> it = list.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
+        System.out.println(it.next());
+        System.out.println(it.next());
+        //这里的it.next()表示先返回当前值来使用，然后it = it.next
+
+//        while(it.hasNext()){
+//            System.out.println(it.next());
+//        }
         //两种写法等价
         for (String s : list) {
             System.out.println(s);
