@@ -34,18 +34,15 @@ public class Game {
         System.out.println(cards);  //打印牌库中剩余的牌
     }
 
-    private static void takeCardFromNextPlayer(List<Player> players) {
-    }
 
-    private static void play_TakeCardFromNextPlayer(List<Player> players) {
-        for (int i = 0; i < players.size()-1; i++) {
+
+    private static void takeCardFromNextPlayer(List<Player> players) {
+        for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
-            Card nextPlayerCard = players.get(i+1).cards.remove(0);
-            player.cards.add(nextPlayerCard);
+            Player nextPlayer = players.get(i == players.size()-1 ? 0 : i+1);
+            player.cards.add(nextPlayer.cards.remove(0));
         }
-        Player player = players.get(players.size()-1);
-        Card nextPlayerCard = players.get(0).cards.remove(0);
-        player.cards.add(nextPlayerCard);
+
     }
 
     private static void play_DeathBlackPeach(List<Player> players) {
