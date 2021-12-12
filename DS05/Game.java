@@ -1,9 +1,6 @@
 package DataStructure.DS05;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,27 +17,58 @@ public class Game {
         players.add(new Player("Pig"));
         players.add(new Player("Dog"));
         players.add(new Player("You"));
+
         initialiseCards(cards);  //初始化52张手牌
+        washCards(cards);//洗牌
         sendCardsToPlayers(players,cards);  //将手牌分别发给不同的玩家，每人13张
         printPlayersCards(players);  //依次打印所有玩家手中的手牌
 
-        play_DeathBlackPeach(players);  //游戏：谁有黑桃♠1他就炸了
+        play_DeathBlackPeach(players);  //游戏：谁有黑桃♠1他就赢了
+        zebraExchangeBlackPeachFromOthers(players);
+        //如果zebra没有黑桃A，就把自己的第一张手牌和其他人手里的黑桃A偷换
 
         takeCardFromNextPlayer(players); //每名玩家依次从下一名玩家那里抽牌
         printPlayersCards(players);  //依次打印所有玩家手中的手牌
 
-        play_DeathBlackPeach(players);  //游戏：谁有黑桃♠1他就炸了
+        play_DeathBlackPeach(players);  //游戏：谁有黑桃♠1他就赢了
 
         System.out.println(cards);  //打印牌库中剩余的牌
     }
 
+    public static void washCards(List<Card> cards) {
+        Random random = new Random();
+        for (int i = 0; i < cards.size(); i++) {
+            int toExchange = random.nextInt(cards.size());
+            Card tempCard = cards.get(i);
+            cards.set(i,cards.get(toExchange));
+            cards.set(toExchange,tempCard);
+        }
+    }
+
+    private static void zebraExchangeBlackPeachFromOthers(List<Player> players) {
+        if (players.get(0).cards.contains(new Card("♠",1))){  //Zebra有黑桃A
+            return;
+        }
+        Player zebra = players.get(0);
+        for (int i = 1; i < players.size(); i++) {
+            Player player = players.get(i);
+            int blackPeachPos = player.cards.indexOf(new Card("♠",1));
+            if (blackPeachPos != -1){
+                player.cards.set(blackPeachPos,zebra.cards.get(0));
+                zebra.cards.set(0,new Card("♠",1));
+            }
+
+        }
+    }
 
 
     private static void takeCardFromNextPlayer(List<Player> players) {
+        Random random = new Random();
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
             Player nextPlayer = players.get(i == players.size()-1 ? 0 : i+1);
-            player.cards.add(nextPlayer.cards.remove(0));
+            int toDrawNextCard = random.nextInt(nextPlayer.cards.size());
+            player.cards.add(nextPlayer.cards.remove(toDrawNextCard));
         }
 
     }
@@ -49,7 +77,7 @@ public class Game {
         for (Player player : players) {
             for (Card playercard : player.cards) {
                 if (playercard.equals(new Card("♠",1))){
-                    System.out.printf("玩家%s有黑桃1,判定为死亡\n",player.name);
+                    System.out.printf("恭喜玩家%s有黑桃1,获得了胜利\n",player.name);
                 }
             }
         }
