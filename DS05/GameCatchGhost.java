@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static DataStructure.DS05.Game.printPlayersCards;
-import static DataStructure.DS05.Game.washCards;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,7 +31,8 @@ public class GameCatchGhost {
         players.add(new Player("You"));
         initialiseCards2(cards);  //初始化19张牌，去掉一张A
         washCards(cards);//洗牌
-        System.out.println(cards);
+        System.out.println("摸完牌以后，玩家中的手牌情况：");
+//        System.out.println(cards);  //看下摸完牌以后牌库的牌
         sendCardsToPlayers(players,cards);  //发牌，如果有两张一样的手牌就丢弃
         printPlayersCards(players);  //依次打印所有玩家手中的手牌
         play(players);  //玩捉鬼游戏
@@ -54,24 +53,30 @@ public class GameCatchGhost {
     }
 
     private static void play(List<Player> players) {
+        int t = 1;
         while(players.size() > 1){
             for (int i = 0; i < players.size(); i++) {
                 Player player = players.get(i);
                 if (player.cards.size() == 0){
+                    System.out.println("****************************************玩家"+player.name+"手牌为空，退出");
                     players.remove(i);
                 }
                 Random random = new Random();
                 Player nextPlayer = players.get(i == players.size()-1 ? 0 : i+1);
-                if (nextPlayer.cards.size() == 0){  //如果下一个玩家的手牌为0，不用进行随机数生成，退出即可
+                if (nextPlayer.cards.size() == 0){  //如果下一个玩家的手牌为0，不用进行随机数生成，下面的不执行
+                    System.out.println("****************************************玩家"+nextPlayer.name+"手牌为空，退出");
                     players.remove(nextPlayer);
-                    break;
+                    continue;
                 }
                 int toDrawNextCardPos = random.nextInt(nextPlayer.cards.size());
                 Card nextCardtoBePutIn = nextPlayer.cards.get(toDrawNextCardPos);
+                System.out.println("第"+t+"轮，"+player.name+"抽了"+nextPlayer.name+"一张手牌"+nextCardtoBePutIn.toString());
                 putCardInOnePlayer(player,nextCardtoBePutIn);
+                printPlayersCards(players);  //依次打印所有玩家手中的手牌
+                t++;
             }
         }
-        System.out.println("恭喜您"+players.get(0).name+"，赢得了胜利，现在他的手牌是"+players.get(0).cards);
+        System.out.println("抓到鬼了！"+players.get(0).name+"是鬼，现在他的手牌是"+players.get(0).cards);
     }
 
     private static void putCardInOnePlayer(Player player,Card nextCardToBePutIn){
@@ -99,5 +104,19 @@ public class GameCatchGhost {
         }
         cards.remove(0);
     }
-
+    public static void printPlayersCards(List<Player> players) {
+        for (Player player : players) {
+            System.out.printf("玩家[%s]的手牌是：",player.name);
+            System.out.println(player.cards);
+        }
+    }
+    public static void washCards(List<Card> cards) {
+        Random random = new Random();
+        for (int i = 0; i < cards.size(); i++) {
+            int toExchange = random.nextInt(cards.size());
+            Card tempCard = cards.get(i);
+            cards.set(i,cards.get(toExchange));
+            cards.set(toExchange,tempCard);
+        }
+    }
 }

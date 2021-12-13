@@ -19,7 +19,9 @@ public class Game {
         players.add(new Player("You"));
 
         initialiseCards(cards);  //初始化52张手牌
+        printCards(cards);  //每行13张打印牌库中的牌
         washCards(cards);//洗牌
+        printCards(cards);  //每行13张打印牌库中的牌
         sendCardsToPlayers(players,cards);  //将手牌分别发给不同的玩家，每人13张
         printPlayersCards(players);  //依次打印所有玩家手中的手牌
 
@@ -33,6 +35,15 @@ public class Game {
         play_DeathBlackPeach(players);  //游戏：谁有黑桃♠1他就赢了
 
         System.out.println(cards);  //打印牌库中剩余的牌
+    }
+
+    private static void printCards(List<Card> cards) {
+        for (int i = 0; i < cards.size(); i++) {
+            System.out.print(cards.get(i)+",");
+            if ((i+1)%13 == 0){
+                System.out.println("");
+            }
+        }
     }
 
     public static void washCards(List<Card> cards) {
