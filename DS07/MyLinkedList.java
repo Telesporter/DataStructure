@@ -195,12 +195,14 @@ public class MyLinkedList implements MyInt_List{
 
     @Override
     public int size() {
-        return 0;
+        return this.size;
     }
 
     @Override
     public void clear() {
-
+        head = null;  //一旦没有引用引用那个对象，它自动会被jvm回收掉
+        last = null;  //last也要置空，因为它也引用着对象
+        size = 0;  //最后别忘了把size置为0
     }
 
     @Override
