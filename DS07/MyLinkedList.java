@@ -1,8 +1,5 @@
 package DataStructure.DS07;
 
-import DataStructure.DS06.MyIterator;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
-
 /**
  * Created with IntelliJ IDEA.
  * User: 13498
@@ -10,7 +7,7 @@ import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
  * Time: 17:33
  * Description: No Description
  */
-public class MyLinkedList implements MyInt_List{
+public class MyLinkedList implements MyInt_List2,MyLinkedList_Iterable{
     public Node head;  //指向第一个结点
     public Node last;  //指向最后一个结点
     public int size;
@@ -207,26 +204,56 @@ public class MyLinkedList implements MyInt_List{
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public boolean contains(Integer e) {
-        return false;
+        return indexOf(e) == -1;
     }
 
     @Override
     public int indexOf(Integer e) {
-        return 0;
+        if (head == null) {
+            throw new NullPointerException("链表为空");
+        }
+        Node cur = head;
+        int count = 0;
+        while(cur != null){
+            if (cur.element.equals(e)){
+                break;
+            }
+            cur = cur.next;
+            count++;
+        }
+        if (count == size){
+            return -1;
+        }
+        return count;
     }
 
     @Override
     public int lastIndexOf(Integer e) {
-        return 0;
+        if (head == null) {
+            throw new NullPointerException("链表为空");
+        }
+        Node cur = last;
+        int count = size-1;
+        while (cur != null){
+            if (cur.element.equals(e)){
+                break;
+            }
+            cur = cur.prev;
+            count++;
+        }
+        return count;
     }
 
+
+
+
     @Override
-    public MyIterator iterator() {
-        return null;
+    public MyLinkedList_Iterator myLinkedList_iterator() {
+        return new MyLinkedListDo_Iterator(this);
     }
 }

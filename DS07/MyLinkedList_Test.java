@@ -65,5 +65,10 @@ public class MyLinkedList_Test {
         System.out.println("size:"+myLinkedList2.size);
 
         System.out.println(myLinkedList2.get(1));
+
+        MyLinkedList_Iterator it = myLinkedList2.myLinkedList_iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
     }
 }
