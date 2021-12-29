@@ -9,9 +9,9 @@ package DS12;
  * Description: No Description
  */
 public class TreeNode {
-    int v;
-    TreeNode left;
-    TreeNode right;
+    public int v;
+    public TreeNode left;
+    public TreeNode right;
 
     public TreeNode(int v) {
         this.v = v;
