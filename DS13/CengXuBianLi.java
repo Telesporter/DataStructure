@@ -36,5 +36,6 @@ public class CengXuBianLi {
     public static void main(String[] args) {
         TreeNode root = BuildTree.buildTree();
         commonOrder(root);
+        System.out.println(IsComplete.isComplete(root));
     }
 }
