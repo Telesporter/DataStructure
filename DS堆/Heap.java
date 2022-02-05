@@ -10,6 +10,7 @@ package DS堆;
 public class Heap {
     //向下调整
     public static void adjustDown(int[] array, int size, int index) {
+        //size表示当前堆的大小，index表示要对那个位置的元素进行向下调整
         //时间复杂度logN
         //size指的是这棵树的结点个数，index指的是根节点的位置
         while (true) {
@@ -48,7 +49,7 @@ public class Heap {
         //找到最后一个节点的父节点的下标
         int lastParentIndex = (lastIndex - 1)/2;
         //从[lastParentIndex,0]不断地向下调整
-        for (int i = lastParentIndex; i >= 0 ; i++) {
+        for (int i = lastParentIndex; i >= 0 ; i--) {
             adjustDown(array,size,i);
         }
     }
