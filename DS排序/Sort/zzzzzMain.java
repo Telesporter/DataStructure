@@ -18,14 +18,16 @@ public class zzzzzMain {
 
 
         //bubbleSort(a,b,c,d);
-        //insertSort(a,b,c,d);
-        shellSort(a,b,c,d);
+        insertSort(a,b,c,d);
+        //shellSort(a,b,c,d);
         //selectSort(a,b,c,d);
         //heapSort(a,b,c,d);
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(b));
         System.out.println(Arrays.toString(c));
         System.out.println(Arrays.toString(d));
+
+
     }
 //    public static int[] randomArray(int n){
 //        Random random = new Random();
