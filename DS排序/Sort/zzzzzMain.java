@@ -18,10 +18,11 @@ public class zzzzzMain {
 
 
         //bubbleSort(a,b,c,d);
-        insertSort(a,b,c,d);
+        //insertSort(a,b,c,d);
         //shellSort(a,b,c,d);
         //selectSort(a,b,c,d);
         //heapSort(a,b,c,d);
+        quickSort(a,b,c,d);
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(b));
         System.out.println(Arrays.toString(c));
@@ -67,5 +68,11 @@ public class zzzzzMain {
         HeapSort.heapSort(b);
         HeapSort.heapSort(c);
         HeapSort.heapSort(d);
+    }
+    public static void quickSort(int[] a,int[] b,int[] c,int[] d){
+        QuickSort.quickSort(a);
+        QuickSort.quickSort(b);
+        QuickSort.quickSort(c);
+        QuickSort.quickSort(d);
     }
 }
