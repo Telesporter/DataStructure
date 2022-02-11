@@ -22,7 +22,8 @@ public class zzzzzMain {
         //shellSort(a,b,c,d);
         //selectSort(a,b,c,d);
         //heapSort(a,b,c,d);
-        quickSort(a,b,c,d);
+        //quickSort(a,b,c,d);
+        mergeSort(a,b,c,d);
         System.out.println(Arrays.toString(a));
         System.out.println(Arrays.toString(b));
         System.out.println(Arrays.toString(c));
@@ -74,5 +75,11 @@ public class zzzzzMain {
         QuickSort.quickSort(b);
         QuickSort.quickSort(c);
         QuickSort.quickSort(d);
+    }
+    public static void mergeSort(int[] a,int[] b,int[] c,int[] d){
+        MergeSort.mergeSort(a);
+        MergeSort.mergeSort(b);
+        MergeSort.mergeSort(c);
+        MergeSort.mergeSort(d);
     }
 }

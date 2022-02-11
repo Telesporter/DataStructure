@@ -13,18 +13,20 @@ public class QuickSort {
     }
     // 区间是 [leftIndex, rightIndex]
     private static void quickSortInternal(int[] a, int leftIndex, int rightIndex) {
+        int size = rightIndex - leftIndex + 1;
+        if (size <= 1) {
+            return;
+        }
         // 由于是闭区间，所以，区间内个个数需要加个 1
         //当要排序的区间内没有元素，或者只有一个元素的时候，直接return
         //左边下标比右边下标大的时候，区间内没有元素，左边和右边相等的时候，区间内只有一个元素
-        if (leftIndex >= rightIndex){
-            return;
-        }
-
-        //也可以写成下面的这种形式
-//        int size = rightIndex - leftIndex + 1;
-//        if (size <= 1) {
+        //所以也可以写成下面的这种形式
+//        if (leftIndex >= rightIndex){
 //            return;
 //        }
+
+
+
 
         // 选择其中一个数（选最左边的） —— a[leftIndex]
         // 执行 partition，小的放左，大的放右
