@@ -20,6 +20,7 @@ public class TestCase {
         tree.insert(7);
         tree.insert(0);
         tree.insert(2);
+        tree.remove(2);
         System.out.println("hello");
         for (int i = -1; i < 10; i++) {
             System.out.println(i+":找到没"+tree.search(i));
